@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12" style="margin-top: 20px">
+      <mat-card style="margin: 50px 0">
+        <form class="create" #f="ngForm" (ngSubmit)="f.form.valid &&ngSubmit()" novalidate>
+          <mat-error *ngIf="status" class="alert alert-primary">{{status}}</mat-error>
+          <mat-form-field style="width: 350px" appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput name="name" [(ngModel)]="form.name" #name="ngModel" required>
+            <mat-icon color="accent" matSuffix>account_circle</mat-icon>
+            <mat-error *ngIf="name.hasError('required')">The name is required!</mat-error>
+          </mat-form-field><br>
+
+          <mat-form-field style="width: 350px" appearance="outline">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="form.date" name="date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field><br>
+
+          <mat-label>Avatar</mat-label>
+          <app-upload (giveURLtoCreate)="onUploadAvatar($event)"></app-upload>
+          <mat-form-field style="width: 350px" appearance="outline">
+            <mat-label>Gender</mat-label>
+            <mat-select [(ngModel)]="form.id" name="g" #gender= "ngModel" required>
+              <mat-option *ngFor="let g of genders" [value]="g.id" >
+                {{g.gender}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="gender.hasError('required')">The Gender is required!</mat-error>
+          </mat-form-field>
+          <br>
+          <button mat-stroked-button color="accent" class="mat-button-toggle-group btn-outline-primary">Create
+            <mat-icon color="accent" matSuffix>category</mat-icon>
+          </button>
+        </form>
+      </mat-card>
+    </div>
+  </div>
+</div>
