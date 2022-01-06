@@ -3,6 +3,7 @@ import {Student} from '../model/Student';
 import {Gender} from '../model/Gender';
 import {StudentService} from '../service/student.service';
 import {Router} from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create',
@@ -28,7 +29,6 @@ export class CreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.studentService.getGender().subscribe(data => {
-      console.log(data)
       this.genders = data;
     });
   }
@@ -39,14 +39,13 @@ export class CreateComponent implements OnInit {
       new Gender(this.form.id),
       this.form.avatar
     );
-    console.log(this.student);
     this.studentService.create(this.student).subscribe(data => {
       if (JSON.stringify(data) === JSON.stringify(this.error)){
         this.status = 'Please upload avatar!';
       }
       if (JSON.stringify(data) === JSON.stringify(this.success)){
-        this.studentService.setStatus('create success');
         this.router.navigate(['']);
+        Swal.fire('create success');
       }
     });
   }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Student} from '../model/Student';
 import {ActivatedRoute, Router} from '@angular/router';
 import {StudentService} from '../service/student.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit',
@@ -40,9 +41,8 @@ export class EditComponent implements OnInit {
   ngSubmit(): void {
     this.studentService.update(this.student.id, this.student).subscribe(data => {
       if (JSON.stringify(data) === JSON.stringify(this.success)){
-        this.studentService.setStatus('Update success !');
-        console.log(data)
         this.router.navigate(['']);
+        Swal.fire('Update success !');
       }
     });
   }

@@ -12,10 +12,11 @@
           </mat-form-field><br>
 
           <mat-form-field style="width: 350px" appearance="outline">
-            <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="picker" [(ngModel)]="form.date" name="date">
+            <mat-label>BirthDay</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="form.date" #da="ngModel" name="date" placeholder="01/10/1996">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="da.hasError('matDatepickerParse')">Not valid dd/mm/yyyy ! Please Try</mat-error>
           </mat-form-field><br>
 
           <mat-label>Avatar</mat-label>
@@ -31,7 +32,7 @@
           </mat-form-field>
           <br>
           <button mat-stroked-button color="accent" class="mat-button-toggle-group btn-outline-primary">Create
-            <mat-icon color="accent" matSuffix>category</mat-icon>
+            <mat-icon color="accent" matSuffix>add</mat-icon>
           </button>
         </form>
       </mat-card>

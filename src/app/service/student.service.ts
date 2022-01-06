@@ -9,13 +9,6 @@ const API = environment.API;
   providedIn: 'root'
 })
 export class StudentService {
-  status: any;
-  getStatus(): any{
-    return this.status;
-  }
-  setStatus(status: string): void {
-    this.status = status;
-  }
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<Student[]>{
